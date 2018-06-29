@@ -1,15 +1,14 @@
-<div class="p-4">
-  <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+<form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+  <div class="form-container">
     <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
-    <input type="text" class="form-control" placeholder="Username" required autofocus formControlName="username">
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" class="form-control" placeholder="Password" required formControlName="password">
-    <!-- <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div> -->
-    <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
-</div>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Input" formControlName="username" placeholder="Username" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" required formControlName="password">
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" color="primary" class="mt-5" [disabled]="!loginForm.valid">Sign in</button>
+  </div>
+</form>

@@ -13,4 +13,24 @@ button:focus {
     outline: none;
 }
 
+.custom-alert-success {
+    margin: 0;
+    width: 100%;
+    background-color: #009688;
+    color: #FAFAFA;
+    padding: 10px;
+    border-radius: 0;
+    transition: 0.5s ease;
+}
+
+.custom-alert-danger {
+    margin: 0;
+    width: 100%;
+    background-color: #F44336;
+    color: #FAFAFA;
+    padding: 10px;
+    border-radius: 0;
+    transition: 0.5s ease;
+}
+
 // @import "~bootstrap/dist/css/bootstrap.css;

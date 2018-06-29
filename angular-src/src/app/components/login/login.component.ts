@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
     this.auth.loginUser(user).subscribe((res) => {
       if (res['success']) {
         this.auth.storeUserData(res['token'], res['user']);
-        this.flashMessage.show('You\'ve successfully logged in', {cssClass: 'alert-success', timeout: 5000});
+        this.flashMessage.show('You\'ve successfully logged in', {cssClass: 'custom-alert-success', timeout: 5000});
         this.routes.navigateByUrl('');
       } else {
-        this.flashMessage.show(res['msg'], {cssClass: 'alert-danger', timeout: 5000});
+        this.flashMessage.show(res['msg'], {cssClass: 'custom-alert-danger', timeout: 5000});
       }
     });
   }
