@@ -1,0 +1,10 @@
+<div *ngIf="selectedLab">
+  <h3>Current Lab : {{ selectedLab.name }}</h3>
+</div>
+
+<div class="list-group" *ngFor="let lab of labs">
+  <button type="button" class="list-group-item list-group-item-action" (click)="clickLab(lab)">
+    {{ lab.name }}
+    <small>{{ lab.description }}</small>
+  </button>
+</div>

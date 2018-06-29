@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md custom-navbar" id="navbar-scroll">
+  <img src="../../../assets/images/ucsc_logo.png" style="height: 50px; width: auto;" class="logo-img" routerLink="/">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto"></ul>
+    <ul class="navbar-nav my-2 my-lg-0">
+      <li class="nav-item">
+        <button mat-button routerLink="/login" routerLinkActive="color='warn'" [hidden]="user">Login</button>
+      </li>
+      <li class="nav-item">
+        <button mat-button routerLink="/register" routerLinkActive="active" [hidden]="user">Register</button>
+      </li>
+      <li class="nav-item">
+        <button mat-button routerLink="/reservation" [hidden]="!user">Reservation</button>
+      </li>
+      <li class="nav-item">
+        <button mat-button routerLink="/profile" [hidden]="!user">Profile</button>
+      </li>
+      <li class="nav-item">
+        <button mat-button (click)="onLogoutClick()" [hidden]="!user">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- <hr class="navbar-line"> -->

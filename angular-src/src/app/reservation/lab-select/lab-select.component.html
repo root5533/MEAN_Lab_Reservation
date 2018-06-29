@@ -1,0 +1,15 @@
+<div class="row mt-4 mb-2" id="lab-scroll">
+  <div class="col-sm-12">
+    <h3>UCSC Laboratories</h3>
+    <hr>
+  </div>
+  <div class="col-sm-12 labs-height">
+    <div class="flex flex-center py-3">
+      <div class="card lab-card p-3 mr-2 flex flex-card flex-column" *ngFor="let lab of labs" (click)="labSelect(lab)" [ngClass]="{'active-card': lab._id === currentLab}">
+        <h5 class="card-title">{{lab.name}}</h5>
+        <p class="card-text" style="text-align: center">{{lab.description}}</p>
+        <p class="card-text">Capacity : {{lab.capacity}}</p>
+      </div>
+    </div>
+  </div>
+</div>

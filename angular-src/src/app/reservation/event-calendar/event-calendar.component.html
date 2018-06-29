@@ -1,0 +1,263 @@
+<!-- <div class="row" *ngIf="!selectedLab">
+  <div class="col-sm-12">
+    <div>
+      <h4 style="opacity: 0.4;">Select a Laboratory to View Calendar</h4>
+    </div>
+  </div>
+</div> -->
+
+<div id="calendar-scroll"></div>
+<div [@openingAnimation]="opening">
+  <div class="row mb-4" *ngIf="selectedLab">
+    <div class="col-sm-12">
+      <h3>Reservations Calendar</h3>
+      <h5>
+        {{ selectedLab.name | uppercase }}
+        <span style="float: right"><button mat-raised-button color="primary" (click)="scrollService.triggerScrollToLabs();">Change Lab</button></span>
+      </h5>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row m-2" class="calendar-container">
+    <div style="display: block; min-height: 50vh; width: 234px;">
+      <ngb-datepicker #dp [(ngModel)]="viewDate" #c1="ngModel" (navigate)="date = $event.next" [dayTemplate]="customDay" outsideDays="hidden"
+        navigation="arrows" (ngModelChange)="dateChange()"></ngb-datepicker>
+      <div style="width: 100%">
+        <div class="mt-4 p-1 text-center">
+          <h5>{{ viewDate | date:"EEE, MMMM d, y" }}</h5>
+        </div>
+        <div class="mt-2 p-1">
+          <ng-template #newReservation><span style="font-size: 1rem;">New Reservation</span></ng-template>
+          <button mat-fab style="margin: auto; display: block;" color="primary" [ngbTooltip]="newReservation" placement="right" (click)="openDialog()">
+            <i class="material-icons">event</i>
+          </button>
+        </div>
+        <div class="mt-1 p-1">
+          <ng-template #changeLab><span style="font-size: 1rem;">Change Laboratory</span></ng-template>
+          <button mat-fab style="margin: auto; display: block;" color="primary" [ngbTooltip]="changeLab" placement="right" (click)="scrollService.triggerScrollToLabs();">
+            <i class="material-icons">location_on</i>
+          </button>
+        </div>
+        <div class="mt-1 p-1">
+          <ng-template #viewReservations><span style="font-size: 1rem;">See Your Reservations</span></ng-template>
+          <button mat-fab style="margin: auto; display: block;" color="primary" [ngbTooltip]="viewReservations" placement="right" (click)="scrollService.triggerScrollToUserReservations()">
+            <i class="material-icons">person</i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Mon <h3>{{ monday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="monday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Tue <h3>{{ tuesday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="tuesday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Wed <h3>{{ wednesday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="wednesday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Thu <h3>{{ thursday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="thursday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Fri <h3>{{ friday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="friday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Sat <h3>{{ saturday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="saturday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+    <div class="weekCalendar">
+      <div class="day-title-container border-top border-right">
+        <span class="day-title">Sun <h3>{{ sunday | date:"d" }}</h3></span>
+      </div>
+      <mwl-calendar-day-view
+        [viewDate]="sunday"
+        [refresh]="refresh"
+        [events]="eventsCalendar"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+        [eventWidth]="120"
+        [dayStartHour]="7"
+        [dayEndHour]="18">
+      </mwl-calendar-day-view>
+    </div>
+  </div>
+
+</div>
+
+<!-- templates -->
+<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+  <span class="custom-day" [class.weekend]="isWeekend(date)" [class.bg-secondary]="selected" 
+    [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+    {{ date.day }}
+  </span>
+</ng-template>
+
+<!-- <ng-template #hourTemplate>
+  <div
+    class="cal-hour-segment">
+    <div class="cal-time">
+      
+    </div>
+  </div>
+</ng-template> -->
+
+<!-- modals -->
+<ng-template #content let-c="close" let-dis="dismiss" style="border-radius: 0 !important; border: 0 !important;">
+  <div class="modal-header">
+    <h4 class="modal-title">New Reservation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')" autofocus="off">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="p-3" style="width: 100%">
+        <h5>User: {{user.name}}</h5>
+        <h5 *ngIf="selectedLab">Location : {{selectedLab.name}}</h5>
+        <form [formGroup]="reservationForm" (ngSubmit)="addReservation(reservationForm.value)">
+          <div class="form-group">
+            <mat-form-field style="width: 100%; padding: 0;">
+              <input matInput class="form-control" type="text" placeholder="Title" formControlName="title">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field style="width: 100%; padding: 0;">
+              <textarea matInput class="form-control" placeholder="Description" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- <div class="form-group ml-3">
+            <label>Start Time</label>
+            <select class="form-control ml-3" style="width: 100px;" formControlName="start_hour">
+              <option disabled>Hours</option>
+              <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option>
+              <option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option>
+              <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option>
+              <option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+            </select>
+          </div>
+          <div class="form-group ml-3">
+            <select class="form-control" style="width: 100px;" formControlName="start_minute">
+              <option disabled>Minutes</option>
+              <option value="0">00</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+          <div class="form-group ml-3">
+            <label>End Time</label>
+            <select class="form-control ml-3" style="width: 100px;" formControlName="end_hour">
+              <option disabled>Hours</option>
+              <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option>
+              <option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option>
+              <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option>
+              <option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+            </select>
+          </div>
+          <div class="form-group ml-3">
+            <select class="form-control" style="width: 100px;" formControlName="end_minute">
+              <option disabled>Minutes</option>
+              <option value="0">00</option>
+              <option value="30">30</option>
+            </select>
+          </div>       -->
+          <div class="form-inline">
+            <div class="form-group">
+              <label class="mr-3">Start : </label>
+              
+            </div>
+            <div class="form-group ml-5">
+              <label class="mr-3">End : </label>
+              <ngb-timepicker formControlName="end_time" minuteStep=30></ngb-timepicker>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid" *ngIf="!isUpdate">Submit</button>
+          <button type="button" class="btn btn-primary" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="updateReservation(reservationForm.value)">Update</button>
+          <button type="button" class="btn btn-danger ml-3" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="deleteReservation()">Delete</button>
+        </form>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Create</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Button Click')">Dismiss</button>
+  </div>
+</ng-template>
+
+

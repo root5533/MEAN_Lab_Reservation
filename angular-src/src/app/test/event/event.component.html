@@ -1,0 +1,10 @@
+<div *ngIf="_currentLab">
+  <h4>Current Lab in eventComponent : {{ _currentLab.name }}</h4>
+</div>
+
+<div class="list-group" *ngFor="let event of events">
+  <button type="button" class="list-group-item list-group-item-action">
+    {{ event.title }}
+    <small>{{ event.description }}</small>
+  </button>
+</div>

@@ -1,0 +1,16 @@
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+// @import "~bootstrap/dist/css/bootstrap.css;

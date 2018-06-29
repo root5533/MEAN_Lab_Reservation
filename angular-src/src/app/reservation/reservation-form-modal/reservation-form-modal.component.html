@@ -1,0 +1,62 @@
+<div class="container-fluid" style="position: relative;">
+    <h4>{{modalTitle}}
+      <!-- <span style="float: right"><button mat-button color="warn" (click)="close()">
+          <i class="material-icons">close</i>
+      </button></span> -->
+    </h4>
+    <button (click)="close()" class="close-btn btn">
+      <i class="material-icons" style="font-size: 14px; color: red;">close</i>
+    </button>
+    <hr style="margin: 0 0 1rem 0;">
+    <div class="px-3 mt-2" style="width: 100%">
+      <div class="error-msg" *ngIf="eventValidateError">{{eventValidateError}}</div>
+      <div class="my-2">
+        <h6>User: {{data.name}}</h6>
+        <h6>Location : {{data.lab.name}}</h6>
+      </div>
+      <div class="my-2">
+        <form [formGroup]="reservationForm" (ngSubmit)="addReservation(reservationForm.value)">
+          <div class="form-group">
+            <mat-form-field style="width: 100%; padding: 0;">
+              <input matInput class="form-control" type="text" placeholder="Title" formControlName="title">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field style="width: 100%; padding: 0;">
+              <textarea matInput class="form-control" placeholder="Description" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-2" style="display: flex; align-items: center; justify-content: flex-start;">
+                <label style="display: block;">Start</label>
+              </div>
+              <div class="col-sm-10">
+                <ngb-timepicker formControlName="start_time" meridian="ON"></ngb-timepicker>
+              </div>
+              <div class="col-sm-2" style="display: flex; align-items: center; justify-content: flex-start;">
+                <label>End</label>
+              </div>
+              <div class="col-sm-10">
+                <ngb-timepicker formControlName="end_time" meridian="ON"></ngb-timepicker>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4" style="display: flex; justify-content: center;">
+            <button mat-raised-button color="primary" type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid" *ngIf="!isUpdate" style="width: 100%;">Create</button>
+            <button mat-raised-button color="primary" type="button" class="btn btn-primary mx-2" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="updateReservation(reservationForm.value)" style="width: 45%">Update</button>
+            <button mat-raised-button color="warn" type="button" class="btn btn-danger mx-2" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="deleteReservation()" style="width: 45%;">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

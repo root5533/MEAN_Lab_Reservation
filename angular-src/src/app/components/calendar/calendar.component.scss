@@ -1,0 +1,47 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.flex-space-between {
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    h4 {
+        text-align: center;
+    }
+}
+
+.flex-column {
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.lab-card {
+    width: 250px;
+    height: 200px;
+    transition: ease 0.3s;
+    cursor: pointer;
+}
+
+.lab-card:hover {
+    background-color: #F44336;
+    color: #FAFAFA;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.flex-calendar {
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.modal-class {
+    padding: 10px;
+}

@@ -1,0 +1,40 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.flex-card {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+}
+
+.lab-card {
+    width: 250px;
+    height: 200px;
+    transition: ease 0.3s;
+    cursor: pointer;
+}
+
+.active-card {
+    background-color: #673AB7;
+    color: #FAFAFA;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.lab-card:hover {
+    background-color: #673AB7;
+    color: #FAFAFA;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.labs-height {
+    min-height: 45vh;
+}

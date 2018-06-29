@@ -1,0 +1,177 @@
+<!-- <div class="list-group p-3 mt-2">
+  <a *ngFor="let lab of labs" class="list-group-item list-group-item-action" (click)="selectLab(lab)">
+    {{lab.name}}
+    <small>{{lab.description}}</small>
+  </a>
+</div> -->
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button">
+              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Dismiss click')">Dismiss</button>
+  </div>
+</ng-template>
+  
+  
+
+<div class="row mt-3 mb-2">
+  <div class="col-sm-12 flex flex-center">
+    <button class="btn btn-outline-dark" (click)="toggleShowLabs()" style="width: 100%">{{labSelect | uppercase}}</button>
+  </div>
+  <div class="col-sm-12" *ngIf="showLabs" [@labAnimation]="showLabs">
+    <div class="flex flex-center p-3">
+      <div class="card lab-card p-3 mx-2 flex flex-center flex-column" *ngFor="let lab of labs" (click)="selectLab(lab)">
+        <h5 class="card-title">{{lab.name}}</h5>
+        <p class="card-text" style="text-align: center">{{lab.description}}</p>
+        <p class="card-text">Capacity : {{lab.capacity}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedLab" [@eventAnimation]="showLabs">
+  <div *ngIf="events">
+
+    <button type="button" class="btn btn-success btn-lg btn-block mb-2" (click)="ngxSmartModalService.getModal('myModal').open()">
+      Add New Reservation
+    </button>
+
+    <div class="row">
+      <div class="col-sm-12 flex flex-calendar">
+        <div>
+          <h4>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h4>
+          <owl-date-time-inline [(ngModel)]="viewDate" (ngModelChange)="refresh.next(); setOtherDate();" [pickerType]="'calendar'" style="margin: auto;"></owl-date-time-inline>
+        </div>
+        
+        <div style="width: 250px; margin: 5px auto;">
+          <h6>{{ prevDate | date:"EEEE d" }}</h6>
+          <mwl-calendar-day-view
+            [viewDate]="prevDate"
+            [refresh]="refresh"
+            [events]="eventsCalendar"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (hourSegmentClicked)="handleEvent('Hour Clicked', $event.date)"
+            [dayStartHour]="7"
+            [dayEndHour]="18">
+          </mwl-calendar-day-view>
+        </div>
+
+        <div style="width: 250px; margin: 5px auto;">
+          <h6>{{ viewDate | date:"EEEE d" }}</h6>
+          <mwl-calendar-day-view
+            [viewDate]="viewDate"
+            [refresh]="refresh"
+            [events]="eventsCalendar"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (hourSegmentClicked)="handleEvent('Hour Clicked', $event.event)"
+            [dayStartHour]="7"
+            [dayEndHour]="18">
+          </mwl-calendar-day-view>
+        </div>
+
+        <div style="width: 250px; margin: 5px auto;">
+          <h6>{{ nextDate | date:"EEEE d" }}</h6>
+          <mwl-calendar-day-view
+            [viewDate]="nextDate"
+            [refresh]="refresh"
+            [events]="eventsCalendar"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (hourSegmentClicked)="handleEvent('Hour Clicked', $event)"
+            [dayStartHour]="7"
+            [dayEndHour]="18">
+          </mwl-calendar-day-view>
+        </div>
+        
+      </div>
+    </div>
+    <div class="p-3 mt-2">
+      <h3>Your Reservations</h3>
+      <ul class="list-group">
+        <div *ngFor="let event of events">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngIf="event.user_id === user._id">
+            {{ event.title }} <small>{{ event.description }}</small><span class="badge badge-primary badge-pill p-2" (click)="updateForm(event)" style="cursor: pointer;">Update</span>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="p-3 mt-2" style="width: 100%">
+    <h3>{{formTitle}}</h3>
+    <h5 *ngIf="selectedLab">To : {{selectedLab.name}}</h5>
+    <form [formGroup]="reservationForm" (ngSubmit)="addReservation(reservationForm.value)">
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="Title" formControlName="title">
+        <small>Add a title to your reservation</small>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Description" formControlName="description"></textarea>
+      </div>
+      <div class="form-inline mb-3">
+        <div class="form-group">
+          <input [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" class="form-control" placeholder="Date" formControlName="date">
+          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+        </div>
+        <div class="form-group ml-3">
+          <label>Start Time</label>
+          <select class="form-control ml-3" style="width: 100px;" formControlName="start_hour">
+            <option disabled>Hours</option>
+            <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option>
+            <option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option>
+            <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option>
+            <option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+          </select>
+        </div>
+        <div class="form-group ml-3">
+          <select class="form-control" style="width: 100px;" formControlName="start_minute">
+            <option disabled>Minutes</option>
+            <option value="0">00</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+        <div class="form-group ml-3">
+          <label>End Time</label>
+          <select class="form-control ml-3" style="width: 100px;" formControlName="end_hour">
+            <option disabled>Hours</option>
+            <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option>
+            <option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option>
+            <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option>
+            <option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+          </select>
+        </div>
+        <div class="form-group ml-3">
+          <select class="form-control" style="width: 100px;" formControlName="end_minute">
+            <option disabled>Minutes</option>
+            <option value="0">00</option>
+            <option value="30">30</option>
+          </select>
+        </div>      
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid" *ngIf="!isUpdate">Submit</button>
+      <button type="button" class="btn btn-primary" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="updateReservation(reservationForm.value)">Update</button>
+      <button type="button" class="btn btn-danger ml-3" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="deleteReservation()">Delete</button>
+    </form>
+  </div>
+</div>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>

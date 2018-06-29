@@ -1,0 +1,25 @@
+.flex-container {
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.nav-card {
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.nav-card:hover {
+    background-color: #673AB7;
+    color: #FAFAFA;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+h3 {
+    margin: 0;
+}
+
+.jumbotron {
+    background-image: url('../../../assets/images/ucsc_website_50.jpg');
+}

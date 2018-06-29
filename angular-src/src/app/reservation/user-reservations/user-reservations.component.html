@@ -1,0 +1,42 @@
+<div *ngIf="selectedLab" style="min-height: 95vh;" class="mt-5" id="user-scroll">
+
+  <h3>Your Reservations</h3>
+  <h5>
+    {{ selectedLab.name | uppercase }}
+    <span style="float: right">
+      <button mat-raised-button color="primary" (click)="scrollService.triggerScrollToLabs();">Change Lab</button>
+      <button mat-raised-button color="primary" (click)="scrollService.triggerScrollToCalendar();" class="ml-3">New Reservation</button>
+    </span>
+  </h5>
+  <hr>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr style="background-color: #673AB7 !important; color: #fafafa;">
+        <th></th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Day</th>
+        <th>Start</th>
+        <th>End</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>{{ event.title }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.start | date:"EEEE, MMMM d" }}</td>
+        <td>{{ event.start | date:"h:mm a" }}</td>
+        <td>{{ event.end | date:"h:mm a" }}</td>
+        <td>
+          <button mat-mini-fab color="warn" (click)="updateReservation(event)">
+              <i class="material-icons">update</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>  
+
+</div>
