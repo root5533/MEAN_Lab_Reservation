@@ -9,7 +9,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -35,6 +34,16 @@ import { MatButtonModule, MatMenuModule, MatFormFieldModule, MatInputModule,
   MatDatepickerModule, MatNativeDateModule, MatDialogModule, MatSnackBarModule, MatCardModule } from '@angular/material';
 import { ReservationFormModalComponent } from './reservation/reservation-form-modal/reservation-form-modal.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { AdminComponent } from './admin/admin.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { ComponentsComponent } from './components/components.component';
+import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
+
+import { AdminGuard } from './guards/admin.guard';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { UcscLabsComponent } from './admin/ucsc-labs/ucsc-labs.component';
+import { LabReservationsComponent } from './admin/lab-reservations/lab-reservations.component';
+import { UsersComponent } from './admin/users/users.component';
 
 
 @NgModule({
@@ -44,7 +53,6 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DashboardComponent,
     ProfileComponent,
     CalendarComponent,
     LabComponent,
@@ -55,6 +63,14 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     EventCalendarComponent,
     UserReservationsComponent,
     ReservationFormModalComponent,
+    AdminComponent,
+    AdminLoginComponent,
+    ComponentsComponent,
+    AdminSidebarComponent,
+    AdminDashboardComponent,
+    UcscLabsComponent,
+    LabReservationsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +95,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     MatCardModule,
     ScrollToModule.forRoot()
   ],
-  providers: [AuthService, AuthGuard, LabService, CalendarEventsService],
+  providers: [AuthService, AuthGuard, LabService, CalendarEventsService, AdminGuard],
   bootstrap: [AppComponent],
   entryComponents: [ReservationFormModalComponent]
 })

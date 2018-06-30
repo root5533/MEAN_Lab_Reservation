@@ -1,0 +1,23 @@
+<div class="main-container">
+
+  <div class="heading">
+    <h2>
+      Administrator Login
+    </h2>
+  </div>
+
+  <div class="mt-5">
+    <form class="login-form" [formGroup]="adminForm" (ngSubmit)="adminLogin(adminForm.value)">
+      <mat-form-field>
+          <input matInput type="text" placeholder="Username" required formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" required formControlName="password">
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" color="primary" class="mt-5">Sign in</button>
+    </form>
+  </div>
+
+</div>

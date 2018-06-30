@@ -3,8 +3,8 @@
   <p class="lead">Login or register to start reserving your slot in our labs</p>
   <hr class="my-4">
   <div>
-    <button mat-raised-button color="primary" routerLink="/login" role="button" [hidden]="user">Login</button>
-    <button mat-raised-button color="warn" class="ml-2" routerLink="/register" [hidden]="user">Register</button>
+    <button mat-raised-button color="primary" routerLink="/home/login" role="button" [hidden]="user">Login</button>
+    <button mat-raised-button color="warn" class="ml-2" routerLink="/home/register" [hidden]="user">Register</button>
   </div>
 </div>
 
@@ -12,7 +12,7 @@
   <div class="flex-container">
     <mat-card class="nav-card mx-3" routerLink="/reservation"><h5>Laboratory Reservation</h5></mat-card>
     <mat-card class="nav-card mx-3" routerLink="/profile"><h5>User Profile</h5></mat-card>
-    <mat-card class="nav-card mx-3" routerLink="/admin"><h5>Administrator Dashboard</h5></mat-card>
+    <mat-card class="nav-card mx-3" routerLink="/admin/login"><h5>Administrator Dashboard</h5></mat-card>
   </div>
 </div>
 

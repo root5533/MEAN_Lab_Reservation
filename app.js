@@ -21,6 +21,7 @@ const app = express();
 
 const users = require('./routes/users');
 const calendar = require('./routes/calendar');
+const admin = require('./routes/admin');
 
 const port = 3000;
 
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/users', users);
 app.use('/api', calendar);
+app.use('/admin', admin);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());

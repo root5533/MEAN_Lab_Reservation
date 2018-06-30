@@ -4,23 +4,38 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
 import { AuthGuard } from './guards/auth.guard';
-import { ParentComponent } from './test/parent/parent.component';
-
 import { LabReservationComponent } from './reservation/lab-reservation/lab-reservation.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { ComponentsComponent } from './components/components.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { UcscLabsComponent } from './admin/ucsc-labs/ucsc-labs.component';
+import { UsersComponent } from './admin/users/users.component';
+import { LabReservationsComponent } from './admin/lab-reservations/lab-reservations.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: ComponentsComponent,
+    children: [
+      {path: '', component: HomeComponent},
+      {path: 'register', component: RegisterComponent},
+      {path: 'login', component: LoginComponent},
+    ]
+  },
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'reservation2', component: CalendarComponent, canActivate: [AuthGuard]},
   {path: 'reservation', component: LabReservationComponent, canActivate: [AuthGuard]},
-  {path: 'test', component: ParentComponent }
+  {path: 'admin', component: AdminComponent,
+    children: [
+      {path: 'login', component: AdminLoginComponent},
+      {path: '', component: AdminDashboardComponent, canActivate: [AdminGuard]},
+      {path: 'ucsc_labs', component: UcscLabsComponent},
+      {path: 'user_reservations', component: LabReservationsComponent, canActivate: [AdminGuard]},
+      {path: 'users', component: UsersComponent, canActivate: [AdminGuard]}
+    ]
+  }
 ];
 
 @NgModule({

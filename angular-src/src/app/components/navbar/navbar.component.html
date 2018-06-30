@@ -8,10 +8,10 @@
     <ul class="navbar-nav mr-auto"></ul>
     <ul class="navbar-nav my-2 my-lg-0">
       <li class="nav-item">
-        <button mat-button routerLink="/login" routerLinkActive="color='warn'" [hidden]="user">Login</button>
+        <button mat-button routerLink="/home/login" routerLinkActive="color='warn'" [hidden]="user">Login</button>
       </li>
       <li class="nav-item">
-        <button mat-button routerLink="/register" routerLinkActive="active" [hidden]="user">Register</button>
+        <button mat-button routerLink="/home/register" routerLinkActive="active" [hidden]="user">Register</button>
       </li>
       <li class="nav-item">
         <button mat-button routerLink="/reservation" [hidden]="!user">Reservation</button>

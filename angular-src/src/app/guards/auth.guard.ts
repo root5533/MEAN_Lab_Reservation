@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
         if (this.auth.userExist) {
             return true;
         } else {
-            this.routes.navigateByUrl('login');
+            this.routes.navigateByUrl('home/login');
             return false;
         }
     }

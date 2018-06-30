@@ -1,0 +1,34 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 20px;
+    padding: 30px;
+}
+
+.lab-func {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.lab-cards {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.lab-func-container {
+    width: 200px;
+}
+
+.mat-card {
+    margin-right: 20px;
+}

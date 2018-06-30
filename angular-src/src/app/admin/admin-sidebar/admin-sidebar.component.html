@@ -1,0 +1,30 @@
+<div class="sidenav">
+
+  <div class="sidenav-row">
+    <div class="logo">
+      <img src="../../../assets/images/ucsc_logo.png" class="logo-img" routerLink="/">
+    </div>
+  </div>
+
+  <div class="sidenav-row mt-3">
+    <div class="heading">
+      <h3>UCSC Labs <br> Admin Dashboard</h3>
+    </div>
+  </div>
+
+  <div class="sidenav-row mt-5">
+    <div class="navlink" routerLink="/admin" routerLinkActive="navlink-active" [routerLinkActiveOptions]="{exact: true}">
+      DashBoard
+    </div>
+    <div class="navlink" routerLink="/admin/ucsc_labs" routerLinkActive="navlink-active">
+      Labs
+    </div>
+    <div class="navlink" routerLink="/admin/user_reservations" routerLinkActive="navlink-active">
+      Reservations
+    </div>
+    <div class="navlink" routerLink="/admin/users" routerLinkActive="navlink-active">
+      Users
+    </div>
+  </div>
+
+</div>
