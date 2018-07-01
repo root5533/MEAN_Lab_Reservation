@@ -1,9 +1,5 @@
 <div class="container-fluid" style="position: relative;">
-    <h4>{{modalTitle}}
-      <!-- <span style="float: right"><button mat-button color="warn" (click)="close()">
-          <i class="material-icons">close</i>
-      </button></span> -->
-    </h4>
+    <h4>{{modalTitle}}</h4>
     <button (click)="close()" class="close-btn btn">
       <i class="material-icons" style="font-size: 14px; color: red;">close</i>
     </button>
@@ -17,17 +13,20 @@
       <div class="my-2">
         <form [formGroup]="reservationForm" (ngSubmit)="addReservation(reservationForm.value)">
           <div class="form-group">
-            <mat-form-field style="width: 100%; padding: 0;">
-              <input matInput class="form-control" type="text" placeholder="Title" formControlName="title">
+            <mat-form-field style="width: 100%; padding: 0;" appearance="fill">
+              <mat-label>Give a title for your reservation</mat-label>
+              <input matInput placeholder="Title" formControlName="title">
             </mat-form-field>
           </div>
           <div class="form-group">
-            <mat-form-field style="width: 100%; padding: 0;">
-              <textarea matInput class="form-control" placeholder="Description" formControlName="description"></textarea>
+            <mat-form-field style="width: 100%; padding: 0;" appearance="fill">
+              <mat-label>Describe the purpose of your reservation</mat-label>
+              <textarea matInput placeholder="Description" formControlName="description"></textarea>
             </mat-form-field>
           </div>
           <div class="form-group">
-            <mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -50,7 +49,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="mt-4" style="display: flex; justify-content: center;">
             <button mat-raised-button color="primary" type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid" *ngIf="!isUpdate" style="width: 100%;">Create</button>
             <button mat-raised-button color="primary" type="button" class="btn btn-primary mx-2" [disabled]="!reservationForm.valid" *ngIf="isUpdate" (click)="updateReservation(reservationForm.value)" style="width: 45%">Update</button>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { AdminService } from "./admin.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
 
   userVisibilityChange: Subject<any> = new Subject<any>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private admin: AdminService) {
     if (localStorage.getItem('id_token')) {
       this.userExist = true;
     } else {
@@ -55,6 +56,7 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
     this.userVisibilityChange.next(false);
+    this.admin.logoutAdmin();
   }
 
   getProfile() {

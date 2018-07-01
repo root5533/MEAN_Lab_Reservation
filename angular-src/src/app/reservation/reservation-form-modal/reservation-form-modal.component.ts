@@ -6,6 +6,7 @@ import { EventService } from '../../services/event.service';
 import { Observable } from 'rxjs';
 import * as Moment from 'moment';
 import { extendMoment } from 'moment-range';
+import { ValidatorService } from "../../services/validator.service";
 
 
 @Component({
@@ -33,10 +34,11 @@ export class ReservationFormModalComponent implements OnInit {
     private fb: FormBuilder,
     private backend: BackEndService,
     public snackBar: MatSnackBar,
-    private eventService: EventService
+    private eventService: EventService,
+    private validator: ValidatorService
   ) {
     this.reservationForm = fb.group({
-      'title': [null, Validators.compose([Validators.required])],
+      'title': [null, Validators.compose([Validators.required, this.validator.noWhitespaceValidator])],
       'description': [null],
       'date': [null, Validators.compose([Validators.required])],
       'start_time': [this.now, Validators.compose([Validators.required])],
@@ -73,8 +75,8 @@ export class ReservationFormModalComponent implements OnInit {
     }
   }
 
-  close(): void {
-    this.dialogRef.close();
+  close(msg: any = null): void {
+    this.dialogRef.close(msg);
   }
 
   addReservation(value) {
@@ -93,17 +95,6 @@ export class ReservationFormModalComponent implements OnInit {
       lab_id: this.data.lab._id,
     };
     this.validateEvent(startDate, endDate, this.data['lab']['_id'], reservation);
-    // if (result) {
-      // this.backend.addNewReservation(reservation).subscribe((res) => {
-      //   if (res['success'] === false) {
-      //     this.openSnackBar(res['msg'], '');
-      //   } else {
-      //     this.eventService.eventChange();
-      //     this.openSnackBar(res['msg'], 'NEW');
-      //     this.close();
-      //   }
-      // });
-    // }
   }
 
   openSnackBar(message: string, action: string) {
@@ -161,14 +152,6 @@ export class ReservationFormModalComponent implements OnInit {
       return;
     }
 
-    // const diff = Math.abs(end - start);
-    // const minutes = Math.floor((diff / 1000) / 60);
-
-    // if (minutes < 30) {
-    //   this.eventValidateError = 'Reservations should have a minimum of 30 minutes';
-    //   return;
-    // }
-
     if (end < start) {
       this.eventValidateError = 'Invalid start and end time';
       return;
@@ -202,7 +185,7 @@ export class ReservationFormModalComponent implements OnInit {
           } else {
             this.eventService.eventChange();
             this.openSnackBar(res2['msg'], 'UPDATE');
-            this.close();
+            this.close(date);
           }
         });
       } else {
@@ -212,7 +195,7 @@ export class ReservationFormModalComponent implements OnInit {
           } else {
             this.eventService.eventChange();
             this.openSnackBar(res2['msg'], 'NEW');
-            this.close();
+            this.close(date);
           }
         });
       }

@@ -32,4 +32,8 @@ export class AdminService {
     this.adminProfile = value;
   }
 
+  logoutAdmin() {
+    this.adminProfile = false;
+  }
+
 }

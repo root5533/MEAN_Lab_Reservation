@@ -179,7 +179,9 @@ export class EventCalendarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.loadEvents();
+      if (result) {
+        this.viewDate = result;
+      }
     });
   }
 

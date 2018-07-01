@@ -18,15 +18,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.user = this.auth.userAvailable;
     this.auth.userVisibilityChange.subscribe((value) => {
-      // console.log('value changed');
       this.user = value;
     });
   }
 
   onLogoutClick() {
     this.auth.logOut();
-    this.flashmessage.show('You have successfully been logged out', {cssClass: 'custom-alert-success', timeout: 5000});
-    this.routes.navigateByUrl('home/login');
+    this.routes.navigateByUrl('home');
     return false;
   }
 
