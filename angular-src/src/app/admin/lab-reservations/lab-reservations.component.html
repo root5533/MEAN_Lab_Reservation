@@ -1,3 +1,81 @@
-<p>
-  lab-reservations works!
-</p>
+<div [ngClass]="{'overlay': overlayValue}"></div>
+<div class="main-container">
+  <div class="heading">
+    <h2>Laboratory Reservations</h2>
+    <hr>
+  </div>
+
+  <div class="mt-5">
+
+    <div class="flex">
+      <div class="reservation-pane pr-3">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a Date</mat-label>
+          <input matInput [matDatepicker]="picker" required autocomplete="off" [(ngModel)]="selectedDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="mb-3" appearance="fill">
+          <mat-label>Select a Lab</mat-label>
+          <mat-select required [disabled]="!labs" [(ngModel)]="selectedLab">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let lab of labs" [value]="lab._id">{{lab.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="mb-3" (click)="search()" [disabled]="!selectedLab || !selectedDate">Search</button>
+        <button mat-raised-button color="primary" class="mb-3" routerLink="/admin/calendar">Reservation Calendar</button>
+        <button mat-raised-button color="warn" class="mb-3" [disabled]="!selectedReservation"
+                [ngbPopover]="delete_lab" popoverTitle="Delete Lab" placement="bottom" #delete_lab="ngbPopover"
+                (shown)="overlay(true)" (hidden)="overlay(false)">
+          Delete Reservation
+        </button>
+
+        <div *ngIf="!labs" class="mb-3">
+          <mat-spinner style="margin: auto; opacity: 0.5;"></mat-spinner>
+        </div>
+
+      </div>
+
+      <div class="reservations px-3">
+
+        <div class="empty-msg" *ngIf="!reservations">
+          <p style="opacity: 0.7">No reservations to show</p>
+        </div>
+
+        <mat-card class="mb-2 custom-card" *ngFor="let reservation of reservations"
+                  [ngClass]="{'active': selectedReservation === reservation._id}" (click)="eventSelect(reservation)">
+
+          <div class="row">
+            <div class="col-sm-1"><i class="material-icons">event_available</i></div>
+            <div class="col-sm-3">
+              {{reservation.start | date:'shortTime'}} - {{reservation.end | date:'shortTime'}}
+            </div>
+            <div class="col-sm-8">
+              {{reservation.title}} - {{reservation.description}}
+            </div>
+          </div>
+
+        </mat-card>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #delete_lab>
+
+  <div class="container-fluid" style="width: 250px;">
+    <h6>Are You Sure ?</h6>
+    <button mat-raised-button color="primary" type="button" class="my-2" style="width: 100%;" (click)="deleteReservation()">Confirm</button>
+    <button mat-raised-button color="warn" type="button" class="my-2" style="width: 100%;" (click)="popoverClose()">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+
+</ng-template>

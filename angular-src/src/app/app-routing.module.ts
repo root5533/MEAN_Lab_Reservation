@@ -15,6 +15,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { UcscLabsComponent } from './admin/ucsc-labs/ucsc-labs.component';
 import { UsersComponent } from './admin/users/users.component';
 import { LabReservationsComponent } from './admin/lab-reservations/lab-reservations.component';
+import {AdminCalendarComponent} from "./admin/admin-calendar/admin-calendar.component";
+import {ReportComponent} from "./admin/report/report.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -33,7 +35,9 @@ const routes: Routes = [
       {path: '', component: AdminDashboardComponent, canActivate: [AdminGuard]},
       {path: 'ucsc_labs', component: UcscLabsComponent, canActivate: [AdminGuard]},
       {path: 'user_reservations', component: LabReservationsComponent, canActivate: [AdminGuard]},
-      {path: 'users', component: UsersComponent, canActivate: [AdminGuard]}
+      {path: 'users', component: UsersComponent, canActivate: [AdminGuard]},
+      {path: 'calendar', component: AdminCalendarComponent, canActivate: [AdminGuard]},
+      {path: 'report', component: ReportComponent}
     ]
   }
 ];

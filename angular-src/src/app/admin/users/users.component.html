@@ -1,3 +1,24 @@
-<p>
-  users works!
-</p>
+<div class="main-container">
+
+  <div class="heading">
+    <h2>Registered Users</h2>
+    <hr>
+  </div>
+
+  <div class="user-list mt-5">
+
+    <mat-card class="mb-2 custom-card" *ngFor="let user of users">
+      <div class="row">
+        <div class="col-sm-1">
+          <i class="material-icons">person</i>
+        </div>
+        <div class="col-sm-4">{{user._id}}</div>
+        <div class="col-sm-2">{{user.name}}</div>
+        <div class="col-sm-2">{{user.username}}</div>
+        <div class="col-sm-3">{{user.email}}</div>
+      </div>
+    </mat-card>
+
+  </div>
+
+</div>

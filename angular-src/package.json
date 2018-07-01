@@ -29,6 +29,8 @@
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
+    "jspdf": "^1.4.1",
+    "jspdf-autotable": "^2.3.4",
     "moment": "^2.22.2",
     "moment-range": "^4.0.1",
     "ng-pick-datetime": "^6.0.5",

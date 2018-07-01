@@ -1,0 +1,28 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+  padding: 30px;
+  padding-bottom: 0;
+}
+
+.user-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 70%;
+  .mat-card{
+    width: 100%;
+    transition: 0.2s ease;
+    padding: 20px !important;
+    overflow: hidden;
+    cursor: pointer;
+    min-width: 700px;
+  }
+}
+
+.custom-card:hover {
+  background-color: #673AB7;
+  color: #FAFAFA;
+}

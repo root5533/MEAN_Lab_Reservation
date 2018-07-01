@@ -31,7 +31,8 @@ import { EventCalendarComponent } from './reservation/event-calendar/event-calen
 import { UserReservationsComponent } from './reservation/user-reservations/user-reservations.component';
 
 import { MatButtonModule, MatMenuModule, MatFormFieldModule, MatInputModule,
-  MatDatepickerModule, MatNativeDateModule, MatDialogModule, MatSnackBarModule, MatCardModule } from '@angular/material';
+  MatDatepickerModule, MatNativeDateModule, MatDialogModule, MatSnackBarModule, MatCardModule,
+  MatSelectModule, MatProgressSpinnerModule } from '@angular/material';
 import { ReservationFormModalComponent } from './reservation/reservation-form-modal/reservation-form-modal.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { AdminComponent } from './admin/admin.component';
@@ -46,6 +47,8 @@ import { LabReservationsComponent } from './admin/lab-reservations/lab-reservati
 import { UsersComponent } from './admin/users/users.component';
 import {PopoverModule} from "ngx-popover";
 import { ValidatorService } from "./services/validator.service";
+import { AdminCalendarComponent } from './admin/admin-calendar/admin-calendar.component';
+import { ReportComponent } from './admin/report/report.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,8 @@ import { ValidatorService } from "./services/validator.service";
     UcscLabsComponent,
     LabReservationsComponent,
     UsersComponent,
+    AdminCalendarComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,8 @@ import { ValidatorService } from "./services/validator.service";
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
     ScrollToModule.forRoot(),
     PopoverModule
   ],

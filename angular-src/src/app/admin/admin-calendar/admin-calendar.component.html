@@ -1,0 +1,17 @@
+<div class="main-container">
+  <div class="container-fluid">
+    <app-lab-select></app-lab-select>
+  </div>
+
+  <div class="container-fluid">
+    <app-event-calendar></app-event-calendar>
+  </div>
+
+  <div class="container-fluid">
+    <app-user-reservations></app-user-reservations>
+  </div>
+
+  <button mat-fab  color="primary" class="to-navbar" (click)="scrollService.triggerScrollToLabs()">
+    <i class="material-icons">arrow_upward</i>
+  </button>
+</div>

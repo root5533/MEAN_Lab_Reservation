@@ -20,7 +20,6 @@ export class AdminService {
   }
 
   loginAdmin(user) {
-    console.log(user);
     if (user.username === 'admin') {
       return true;
     } else {
