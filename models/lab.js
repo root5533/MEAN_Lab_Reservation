@@ -22,3 +22,26 @@ module.exports.getLabs = async function(callback) {
 module.exports.addLab = function(newLab, callback) {
     newLab.save(callback);
 }
+
+module.exports.deleteLab = async function(lab_id, callback) {
+    try {
+        return await Lab.remove({_id : lab_id}, callback);
+    } catch (e) {
+        throw e;
+    }
+}
+
+module.exports.updateLab = async function(id, updateLab, callback) {
+    try {
+        await Lab.findById(id).then((lab) => {
+            if (lab) {
+                lab.name = updateLab.name;
+                lab.description = updateLab.description;
+                lab.capacity = updateLab.capacity
+                lab.save(callback);
+            }
+        })
+    } catch (e) {
+        throw e;
+    }
+}

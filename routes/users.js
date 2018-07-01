@@ -53,7 +53,8 @@ router.post('/authenticate', (req, res, next) => {
                         name: user.name,
                         username: user.username,
                         email: user.email
-                    }
+                    },
+                    msg: 'Succesfully signed in'
                 })
             } else {
                 res.json({

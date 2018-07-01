@@ -31,7 +31,7 @@ const routes: Routes = [
     children: [
       {path: 'login', component: AdminLoginComponent},
       {path: '', component: AdminDashboardComponent, canActivate: [AdminGuard]},
-      {path: 'ucsc_labs', component: UcscLabsComponent},
+      {path: 'ucsc_labs', component: UcscLabsComponent, canActivate: [AdminGuard]},
       {path: 'user_reservations', component: LabReservationsComponent, canActivate: [AdminGuard]},
       {path: 'users', component: UsersComponent, canActivate: [AdminGuard]}
     ]

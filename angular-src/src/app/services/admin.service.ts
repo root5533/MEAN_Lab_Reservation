@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Observable} from "rxjs/index";
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,13 @@ export class AdminService {
     }
   }
 
-  loginAdmin(admin) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-type', 'application/json');
-    return this.http.post('http://localhost:3000/admin/authenticate', admin, {headers: headers});
+  loginAdmin(user) {
+    console.log(user);
+    if (user.username === 'admin') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   setAdminProfile(value: boolean) {

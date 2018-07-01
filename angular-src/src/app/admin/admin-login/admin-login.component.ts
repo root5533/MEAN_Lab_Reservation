@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../services/admin.service';
+import { AuthService } from '../../services/auth.service';
+import { AdminService } from "../../services/admin.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -13,8 +14,8 @@ export class AdminLoginComponent implements OnInit {
 
   adminForm: FormGroup;
 
-  constructor( private fb: FormBuilder, private auth: AdminService, private routes: Router,
-    public snackBar: MatSnackBar ) {
+  constructor( private fb: FormBuilder, private auth: AuthService, private routes: Router,
+    public snackBar: MatSnackBar, private admin: AdminService ) {
 
     this.adminForm = fb.group({
       'username': [null, Validators.compose([Validators.required])],
@@ -25,7 +26,7 @@ export class AdminLoginComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.auth.adminLoggedIn) {
+    if (this.admin.adminLoggedIn) {
       this.routes.navigateByUrl('/admin');
     }
 
@@ -36,11 +37,17 @@ export class AdminLoginComponent implements OnInit {
       'username': value.username,
       'password': value.password
     };
-    this.auth.loginAdmin(admin).subscribe((res) => {
+    this.auth.loginUser(admin).subscribe((res) => {
       if (res['success']) {
-        this.auth.setAdminProfile(true);
-        this.openSnackBar(res['msg'], 'LOGIN');
-        this.routes.navigateByUrl('/admin');
+        const isadmin = this.admin.loginAdmin(res['user']);
+        if (isadmin){
+          this.auth.storeUserData(res['token'], res['user']);
+          this.admin.setAdminProfile(true);
+          this.openSnackBar(res['msg'], 'LOGGED');
+          this.routes.navigateByUrl('/admin');
+        } else {
+          this.openSnackBar('Please login with admin credentials', 'NOT ADMIN');
+        }
       } else {
         this.openSnackBar(res['msg'], 'FAILED');
       }

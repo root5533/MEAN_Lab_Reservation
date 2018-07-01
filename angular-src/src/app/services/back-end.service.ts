@@ -57,4 +57,25 @@ export class BackEndService {
     headers = headers.set('Content-type', 'application/json');
     return this.http.delete('http://localhost:3000/api/event/' + id, {headers: headers});
   }
+
+  createNewLab(lab) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.auth.getToken());
+    headers = headers.set('Content-type', 'application/json');
+    return this.http.post('http://localhost:3000/api/lab', lab, {headers: headers});
+  }
+
+  deleteLab(lab_id) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.auth.getToken());
+    headers = headers.set('Content-type', 'application/json');
+    return this.http.delete('http://localhost:3000/api/lab/' + lab_id, {headers: headers});
+  }
+
+  updateLab(lab) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.auth.getToken());
+    headers = headers.set('Content-type', 'application/json');
+    return this.http.put('http://localhost:3000/api/lab', lab, {headers: headers});
+  }
 }

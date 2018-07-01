@@ -4,6 +4,7 @@
     justify-content: flex-start;
     margin-left: 20px;
     padding: 30px;
+    padding-bottom: 0;
 }
 
 .lab-func {
@@ -31,4 +32,48 @@
 
 .mat-card {
     margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.active-lab {
+  transition: 0.3s ease;
+  background-color: #673AB7;
+  color: #fafafa !important;
+  transform: scale(1.1);
+}
+
+.lab-card {
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.lab-card:hover {
+  transform: scale(1.2);
+}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  transition: 0.3s ease;
+}
+
+.preview-data {
+  margin-top: 25px;
+  h6 {
+    margin-bottom: 5px;
+  }
+  hr {
+    margin: 0;
+  }
+  p {
+    opacity: 0.8;
+  }
 }

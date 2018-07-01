@@ -44,7 +44,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { UcscLabsComponent } from './admin/ucsc-labs/ucsc-labs.component';
 import { LabReservationsComponent } from './admin/lab-reservations/lab-reservations.component';
 import { UsersComponent } from './admin/users/users.component';
-
+import {PopoverModule} from "ngx-popover";
+import { ValidatorService } from "./services/validator.service";
 
 @NgModule({
   declarations: [
@@ -93,9 +94,10 @@ import { UsersComponent } from './admin/users/users.component';
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    PopoverModule
   ],
-  providers: [AuthService, AuthGuard, LabService, CalendarEventsService, AdminGuard],
+  providers: [AuthService, AuthGuard, LabService, CalendarEventsService, AdminGuard, ValidatorService],
   bootstrap: [AppComponent],
   entryComponents: [ReservationFormModalComponent]
 })

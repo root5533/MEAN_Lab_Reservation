@@ -1,27 +1,106 @@
+<div [ngClass]="{'overlay': overlayValue}"></div>
 <div class="main-container">
-
   <div class="heading">
     <h2>UCSC Labs</h2>
+    <hr>
   </div>
 
   <div class="mt-5">
     <div class="flex">
-      <div class="lab-func-container">
+      <div class="lab-func-container pr-3" style="height: 80vh; border-right: solid; border-color: #EEEEEE">
         <div class="lab-func">
-          <button mat-raised-button color="primary" class="mb-3">Create Lab</button>
-          <button mat-raised-button color="warn">Delete Selected Lab</button>
+          <button mat-raised-button color="primary" class="mb-3" [ngbPopover]="create_lab" popoverTitle="New Lab" placement="bottom" #create_lab="ngbPopover"
+              (shown)="overlay(true)" (hidden)="overlay(false)" (click)="createBtnClick()">
+            Create Lab
+          </button>
+          <button mat-raised-button color="primary" [disabled]="!selectedLab" class="mb-3" [ngbPopover]="update_lab" popoverTitle="Update Lab" placement="bottom" #update_lab="ngbPopover"
+                  (shown)="overlay(true)" (hidden)="overlay(false)" (click)="updateBtnClick()">
+            Update Selected Lab
+          </button>
+          <button mat-raised-button color="warn" [disabled]="!selectedLab" [ngbPopover]="delete_lab" popoverTitle="Delete Lab" placement="bottom" #delete_lab="ngbPopover"
+              (shown)="overlay(true)" (hidden)="overlay(false)">
+            Delete Selected Lab
+          </button>
+          <div class="preview-data" *ngIf="selectedLab">
+            <h6>Description</h6>
+            <hr>
+            <p>{{previewLab.description}}</p>
+          </div>
+          <div class="preview-data" *ngIf="selectedLab">
+            <h6>Capacity</h6>
+            <hr>
+            <p>{{previewLab.capacity}}</p>
+          </div>
         </div>
       </div>
-      <div class="lab-cards-container mx-5">
+      <div class="lab-cards-container px-3">
         <div class="lab-cards">
-            <mat-card>Simple card</mat-card>
-            <mat-card>Simple card</mat-card>
-            <mat-card>Simple card</mat-card>
-            <mat-card>Simple card</mat-card>
-            <mat-card>Simple card</mat-card>
+          <mat-card class="lab-card noselect" *ngFor="let lab of labs" (click)="labSelect(lab)" [ngClass]="{'active-lab': selectedLab === lab._id}">{{ lab.name }}</mat-card>
         </div>
       </div>
-    </div>
+      </div>
   </div>
+
+  <ng-template #create_lab>
+    <div class="container-fluid">
+
+      <div class="lab-form">
+        <form [formGroup]="labForm" (ngSubmit)="createLab(labForm.value)">
+          <mat-form-field style="width: 100%; padding: 0;">
+            <input matInput placeholder="Name" autocomplete="off" formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field style="width: 100%; padding: 0;">
+            <textarea matInput placeholder="Description" autocomplete="off" formControlName="description" required></textarea>
+          </mat-form-field>
+          <mat-form-field style="width: 100%; padding: 0;">
+            <input matInput type="number" placeholder="Capacity" autocomplete="off" formControlName="capacity" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" style="width: 100%;" [disabled]="!labForm.valid">Create</button>
+          <button mat-raised-button color="warn" type="button" class="my-2" style="width: 100%;" (click)="popoverClose()">
+            <i class="material-icons">close</i>
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </ng-template>
+
+  <ng-template #delete_lab>
+
+    <div class="container-fluid" style="width: 250px;">
+      <h6>Are You Sure ?</h6>
+      <button mat-raised-button color="primary" type="button" class="my-2" style="width: 100%;" (click)="deleteLab()">Confirm</button>
+      <button mat-raised-button color="warn" type="button" class="my-2" style="width: 100%;" (click)="popoverDeleteClose()">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+
+  </ng-template>
+
+  <ng-template #update_lab>
+    <div class="container-fluid">
+
+      <div class="lab-form">
+        <form [formGroup]="labForm" (ngSubmit)="updateLab(labForm.value)">
+          <mat-form-field style="width: 100%; padding: 0;">
+            <input matInput placeholder="Name" autocomplete="off" formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field style="width: 100%; padding: 0;">
+            <textarea matInput placeholder="Description" autocomplete="off" formControlName="description" required></textarea>
+          </mat-form-field>
+          <mat-form-field style="width: 100%; padding: 0;">
+            <input matInput type="number" placeholder="Capacity" autocomplete="off" formControlName="capacity" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" style="width: 100%;" [disabled]="!labForm.valid">Update</button>
+          <button mat-raised-button color="warn" type="button" class="my-2" style="width: 100%;" (click)="popoverUpdateClose()">
+            <i class="material-icons">close</i>
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </ng-template>
 
 </div>

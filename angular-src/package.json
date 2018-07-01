@@ -22,7 +22,7 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "@ng-bootstrap/ng-bootstrap": "^2.1.1",
+    "@ng-bootstrap/ng-bootstrap": "^2.1.2",
     "@nicky-lenaers/ngx-scroll-to": "^1.0.0",
     "angular-calendar": "^0.25.2",
     "angular2-flash-messages": "^2.0.5",
@@ -32,6 +32,7 @@
     "moment": "^2.22.2",
     "moment-range": "^4.0.1",
     "ng-pick-datetime": "^6.0.5",
+    "ngx-popover": "0.0.16",
     "npm": "^6.1.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
