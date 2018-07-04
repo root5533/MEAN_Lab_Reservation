@@ -1,3 +1,35 @@
-<p>
-  admin-dashboard works!
-</p>
+<div class="main-container">
+
+  <div class="today-preview">
+
+    <h3>Today</h3>
+    <hr>
+
+    <div class="preview mt-5" *ngIf="labs && events">
+
+      <div class="lab-list mb-5" *ngFor="let lab of labs">
+        <h5 class="lab-heading">{{lab.name}}</h5>
+        <div class="event-list">
+          <div class="item" *ngFor="let event of events">
+            <mat-card *ngIf="event.lab_id === lab._id">
+              <div class="row">
+                <div class="col-sm-3">
+                  {{event.title}}
+                </div>
+                <div class="col-sm-5">
+                  {{event.description}}
+                </div>
+                <div class="col-sm-4" style="text-align: right">
+                  {{event.start | date:"h:mm a"}} - {{event.end | date:"h:mm a"}}
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

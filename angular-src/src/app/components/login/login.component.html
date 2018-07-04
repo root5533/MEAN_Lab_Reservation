@@ -1,14 +1,18 @@
-<form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
-  <div class="form-container">
-    <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Input" formControlName="username" placeholder="Username" required>
-    </mat-form-field>
+<div class="flex-center">
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <div class="form-container">
+      <h1 class="h3 mb-5 font-weight-normal">Sign In</h1>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="username" required>
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput type="password" placeholder="Password" required formControlName="password">
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" required formControlName="password">
+      </mat-form-field>
 
-    <button mat-raised-button type="submit" color="primary" class="mt-5" [disabled]="!loginForm.valid">Sign in</button>
-  </div>
-</form>
+      <button mat-raised-button type="submit" color="primary" class="mt-3" [disabled]="!loginForm.valid">Sign in</button>
+    </div>
+  </form>
+</div>

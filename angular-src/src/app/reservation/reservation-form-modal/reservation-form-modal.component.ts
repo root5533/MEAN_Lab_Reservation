@@ -73,6 +73,28 @@ export class ReservationFormModalComponent implements OnInit {
     } else {
       this.modalTitle = 'New Reservation';
     }
+
+    if (this.data['date']) {
+      const start = new Date(this.data['date']);
+      const start_time = {
+        hour: start.getHours(),
+        minute: start.getMinutes()
+      }
+      const end_time = {
+        hour: start.getHours(),
+        minute: Moment(start).add(30, 'm').toDate().getMinutes()
+      }
+      const setEvent = {
+        title: '',
+        description: '',
+        date: this.data['date'],
+        start_time: start_time,
+        end_time: end_time
+      };
+      this.reservationForm.setValue(setEvent);
+      this.reservationForm.patchValue(setEvent);
+
+    }
   }
 
   close(msg: any = null): void {
@@ -154,6 +176,14 @@ export class ReservationFormModalComponent implements OnInit {
 
     if (end < start) {
       this.eventValidateError = 'Invalid start and end time';
+      return;
+    }
+
+    var difference = end.getTime() - start.getTime(); // This will give difference in milliseconds
+    var resultInMinutes = Math.round(difference / 60000);
+
+    if (resultInMinutes < 30) {
+      this.eventValidateError = 'Reservation should have a minimum time period of 30 minutes';
       return;
     }
 

@@ -2,37 +2,72 @@
   {{message}}
 </div>
 
-<form (ngSubmit)="onRegisterSubmit(registerForm.value)" [formGroup]="registerForm">
-<div class="form-container">
+<div class="flex-center">
+  <form (ngSubmit)="onRegisterSubmit(registerForm.value)" [formGroup]="registerForm">
+  <div class="form-container">
     <h1 class="h3 mb-3 font-weight-normal">Registration - New User</h1>
-    <mat-form-field class="mb-3">
-      <input  matInput type="text" placeholder="Enter Name" formControlName="name" placeholder="Name" required>
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>Full Name</mat-label>
+      <input  matInput type="text" formControlName="name" required>
       <mat-error *ngIf="!registerForm.controls['name'].valid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
         Name should be atleast 3 chracters long
       </mat-error>
     </mat-form-field>
-  
-    <mat-form-field class="mb-3">
-      <input matInput type="text" placeholder="Enter Username" formControlName="username" placeholder="Username" required>
+
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>University / Institution</mat-label>
+      <mat-select required formControlName="university">
+        <mat-option>--</mat-option>
+        <mat-option value="university_of_colombo">University of Colombo</mat-option>
+        <mat-option value="university_of_colombo_ucsc">University of Colombo School of Computing</mat-option>
+        <mat-option value="university_of_kelaniya">University of Kelaniya</mat-option>
+        <mat-option value="university_of_moratuwa">University of Moratuwa</mat-option>
+        <mat-option value="university_of_peradeniya">University of Peradeniya</mat-option>
+        <mat-option value="university_of_sri_jayawardanapura">University of Sri Jayawardanapura</mat-option>
+        <mat-option value="university_of_sabaragamuwa">University of Sabaragamuwa</mat-option>
+        <mat-option value="iit">IIT</mat-option>
+        <mat-option value="sliit">SLIIT</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>Degrees</mat-label>
+      <textarea matInput type="text" placeholder="Enter Username" formControlName="degrees"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>Mobile Number</mat-label>
+      <input matInput type="text" placeholder="Enter Username" formControlName="contact" required>
+      <mat-error *ngIf="!registerForm.controls['contact'].valid && (registerForm.controls['contact'].dirty || registerForm.controls['contact'].touched)">
+        Please provide a proper contact number
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" placeholder="Enter Username" formControlName="username" required>
       <mat-error *ngIf="!registerForm.controls['username'].valid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
           Username should be atleast 3 characters long
       </mat-error>
     </mat-form-field>
-      
-    <mat-form-field class="mb-3">
-      <input matInput type="email" placeholder="Enter Email" formControlName="email" required placeholder="Email">
+
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>Official Email Address</mat-label>
+      <input matInput type="email" formControlName="email" required>
       <mat-error *ngIf="!registerForm.controls['email'].valid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
         Please provide a valid email address
       </mat-error>
     </mat-form-field>
-      
-    <mat-form-field class="mb-3">
-      <input matInput type="password" id="exampleInputPassword1" placeholder="Password" formControlName="password" placeholder="Password" required>
+
+    <mat-form-field class="mb-3" appearance="fill">
+      <mat-label>Password(Minimum 6 Characters)</mat-label>
+      <input matInput type="password" id="exampleInputPassword1" placeholder="Password" formControlName="password" required>
       <mat-error *ngIf="!registerForm.controls['password'].valid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
           Password should be atleast 6 characters long
         </mat-error>
     </mat-form-field>
 
     <button mat-raised-button type="submit" color="primary" [disabled]="!registerForm.valid">Submit</button>
+  </div>
+  </form>
 </div>
-</form>

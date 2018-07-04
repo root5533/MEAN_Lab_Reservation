@@ -37,7 +37,7 @@ const routes: Routes = [
       {path: 'user_reservations', component: LabReservationsComponent, canActivate: [AdminGuard]},
       {path: 'users', component: UsersComponent, canActivate: [AdminGuard]},
       {path: 'calendar', component: AdminCalendarComponent, canActivate: [AdminGuard]},
-      {path: 'report', component: ReportComponent}
+      {path: 'report', component: ReportComponent, canActivate: [AdminGuard]}
     ]
   }
 ];

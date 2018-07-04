@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const addDays = require('date-fns/add_days')
+const addDays = require('date-fns/add_days');
+const moment = require('moment');
+moment().format();
 
 const EventSchema = mongoose.Schema({
     title: {
@@ -81,6 +83,37 @@ module.exports.getEventsFromDate = async function(date, lab_id, callback) {
     try {
         await Event.find(query, callback);
     } catch(e) {
+        throw e;
+    }
+}
+
+module.exports.getEventsForReport = async function(from, to, lab_id, callback) {
+    const query = {
+        start: {
+            "$gte": from,
+            "$lt": to
+        },
+        lab_id: lab_id
+    }
+    try {
+        await Event.find(query, callback);
+    } catch(e) {
+        throw e;
+    }
+}
+
+module.exports.getAllEventsToday = function(callback) {
+    const from = moment().startOf('day').toDate();
+    const to = moment().endOf('day').toDate();
+    const query = {
+        start: {
+            "$gte": from,
+            "$lt": to
+        }
+    }
+    try {
+        Event.find(query, callback);
+    } catch (e) {
         throw e;
     }
 }

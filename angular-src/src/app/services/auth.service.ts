@@ -33,8 +33,7 @@ export class AuthService {
   registerUser(user) {
     let headers = new HttpHeaders();
     headers = headers.set('Content-type', 'application/json');
-    return this.http.post('http://localhost:3000/users/register', user, {headers: headers})
-    .toPromise();
+    return this.http.post('http://localhost:3000/users/register', user, {headers: headers});
   }
 
   loginUser(user) {

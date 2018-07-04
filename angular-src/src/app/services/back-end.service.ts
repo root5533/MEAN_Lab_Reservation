@@ -85,4 +85,18 @@ export class BackEndService {
     headers = headers.set('Content-type', 'application/json');
     return this.http.get('http://localhost:3000/users', {headers: headers});
   }
+
+  getEventsForReport(data) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.auth.getToken());
+    headers = headers.set('Content-type', 'application/json');
+    return this.http.post('http://localhost:3000/api/event/report', data, {headers: headers});
+  }
+
+  getAllEventsToday() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.auth.getToken());
+    headers = headers.set('Content-type', 'application/json');
+    return this.http.get('http://localhost:3000/api/event/all/today', {headers: headers});
+  }
 }

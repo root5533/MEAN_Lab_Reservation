@@ -1,0 +1,31 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+  padding: 30px;
+  padding-bottom: 0;
+}
+
+.preview {
+  width: 70%;
+  min-width: 700px;
+}
+
+
+
+.mat-card {
+  padding: 15px !important;
+  margin-bottom: 10px;
+  width: 80%;
+  transition: 0.2s ease;
+}
+
+.mat-card:hover {
+  color: #FAFAFA;
+  background-color: #673AB7;
+}
+
+.lab-heading {
+  color: #424242;
+}

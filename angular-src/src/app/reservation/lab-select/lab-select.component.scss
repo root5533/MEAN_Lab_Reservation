@@ -1,26 +1,27 @@
 .flex {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
 }
 
 .flex-center {
-    align-items: center;
+    align-items: baseline;
     justify-content: flex-start;
     align-content: flex-start;
 }
 
-.flex-card {
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
-}
+//.flex-card {
+//    flex-direction: column;
+//    justify-content: space-between;
+//    align-items: center;
+//    align-content: space-between;
+//}
 
 .lab-card {
-    width: 250px;
-    height: 200px;
     transition: ease 0.3s;
     cursor: pointer;
+    max-width: 400px;
+    min-height: 160px;
+    margin-right: 20px;
 }
 
 .active-card {
@@ -36,5 +37,5 @@
 }
 
 .labs-height {
-    min-height: 45vh;
+    min-height: 95vh;
 }

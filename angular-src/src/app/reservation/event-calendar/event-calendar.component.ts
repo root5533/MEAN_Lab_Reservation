@@ -151,7 +151,20 @@ export class EventCalendarComponent implements OnInit {
   }
 
   handleEvent(action: String, event: CalendarEvent) {
-    // console.log(action, event);
+    console.log(action, event);
+    if (action === 'Hour Clicked') {
+      const dialogRef = this.dialog.open(ReservationFormModalComponent, {
+        width: '40%',
+        minWidth: '400px',
+        data: { name: this.user.name, lab: this.selectedLab, date: event }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.viewDate = result;
+        }
+      });
+    }
   }
 
   isWeekend(date: NgbDateStruct) {

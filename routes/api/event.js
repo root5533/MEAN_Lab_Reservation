@@ -132,8 +132,46 @@ router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req
         }
     } catch(e) {
         throw e;
-    }
-    
+    }  
 })
+
+router.get('/all/today', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    Event.getAllEventsToday((err, events) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: 'Something went wrong when retrieving events'
+            })
+        } else {
+            res.json({
+                success: true,
+                msg: 'Succesfully received data',
+                events: events
+            })
+        }
+    })
+});
+
+router.post('/report', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
+    const from = req.body.from;
+    const to = req.body.to;
+    const lab_id = req.body.lab_id;
+    Event.getEventsForReport(from, to, lab_id, (err, events) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: 'Failed to retrieve events'
+            })
+        } else {
+            res.json({
+                success: true,
+                data: events,
+                msg: 'Successfully retrieved events'
+            })
+        }
+    })
+})
+
+
 
 module.exports = router;
